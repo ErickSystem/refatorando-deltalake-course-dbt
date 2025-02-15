@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: count_orders_by_date
+    description: "Minha primeira view usando DBT lendo de uma tabela Delta lake"
+    columns:
+      - name: mes_pedido
+        description: "Mês do pedido (primeiro dia do mês)"
+        tests:
+          - not_null
+      - name: total_pedidos
+        description: "Total de pedidos no mês"
+        tests:
+          - not_null

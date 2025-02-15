@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: tpch
+    catalog: samples      # Nome do catálogo no Databricks
+    schema: tpch         # Schema (ou database) onde estão as tabelas
+    tables:
+      - name: customer
+        description: "Tabela customer do dataset TPC-H"
+      - name: lineitem
+        description: "Tabela lineitem do dataset TPC-H"
+      - name: nation
+        description: "Tabela nation do dataset TPC-H"
+      - name: orders
+        description: "Tabela orders do dataset TPC-H"
+      - name: part
+        description: "Tabela part do dataset TPC-H"
+      - name: partsupp
+        description: "Tabela partsupp do dataset TPC-H"
+      - name: region
+        description: "Tabela region do dataset TPC-H"
+      - name: supplier
+        description: "Tabela supplier do dataset TPC-H"
