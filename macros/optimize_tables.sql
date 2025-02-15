@@ -11,22 +11,13 @@
     {% set full_table_name = catalog_name ~ "." ~ schema_name ~ "." ~ table_name %}
 
     {% set sql %}
-    OPTIMIZE {{ full_table_name }} ZORDER BY ({{ zorder_columns }})
+      OPTIMIZE {{ full_table_name }} ZORDER BY ({{ zorder_columns }})
     {% endset %}
 
     {{ log("Running: " ~ sql, info=True) }}
     {{ run_query(sql) }}
 
-    {{
-        log(
-            "Optimized table "
-            ~ full_table_name
-            ~ " with ZORDER BY ("
-            ~ zorder_columns
-            ~ ")",
-            info=True,
-        )
-    }}
+    {{ log("Optimized table " ~ full_table_name ~ " with ZORDER BY (" ~ zorder_columns ~ ")", info=True) }}
 {% endmacro %}
 
 {% macro optimize_all_tables() %}
@@ -37,10 +28,10 @@
     {% set tables_to_optimize = [
         {"relation": ref("dim_customer"), "zorder": "c_custkey"},
         {"relation": ref("dim_supplier"), "zorder": "s_suppkey"},
-        {"relation": ref("gold_orders_by_month"), "zorder": "order_month"},
+        {"relation": ref("gold_orders_by_month"), "zorder": "order_month"}
     ] %}
 
     {% for t in tables_to_optimize %}
-        {{ optimize_table(t.relation, t.zorder) }}
+        {% do optimize_table(t.relation, t.zorder) %}
     {% endfor %}
 {% endmacro %}
